@@ -1,4 +1,4 @@
-"Entity","Code","Day","Monthly.CO..emissions.from.domestic.aviation","Monthly.CO..emissions.from.international.aviation","Year"
+"Entity","Code","Day","co_domestic_aviation","co_international_aviation","Year"
 "Afghanistan","AFG",2019-01-15,2098.05,10805.4,"2019"
 "Afghanistan","AFG",2019-02-15,2979.15,10430.7,"2019"
 "Afghanistan","AFG",2019-03-15,1964.36,12223.3,"2019"
