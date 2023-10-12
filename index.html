@@ -4,14 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homework 10 Visualizations</title>
+    <link rel="stylesheet" href="css/styles.css"> 
     <!-- Include Vega and Vega-Lite libraries -->
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 </head>
 <body>
-    <div id="vis"></div>
+  <div class="dashboard-title">Worldwide Tourism Trends Insights</div>
+  <div class="container">
+    <div class="text">
+      <p style="color: rgb(63, 63, 82); font-size: 16px; font-family: 'Times New Roman', serif;"> The first visualization focuses on the ratio of visitors and the length of stay in various countries worldwide. 
+        The ratio of visitors provides insight into the popularity of different countries as tourist destinations. 
+        It helps identify nations that are major hubs for international visitors and those with relatively lower 
+        tourism traffic.</p>
+
+    
+    
+    <div class="visualization" id="vis"></div>
+
+    <div class="container">
+      <div class="text">
+        <p style="color: rgb(63, 63, 82); font-size: 16px; font-family: 'Times New Roman', serif;">The second 
+        visualization focuses on illustrating the number of personal travels made by individuals from specific 
+        countries over a period of two decades. </p>
+
     <div id="vis2"></div>
+
+
+    <div class="container">
+      <div class="text">
+        <p style="color: rgb(63, 63, 82); font-size: 16px; font-family: 'Times New Roman', serif;">The third 
+        visualization focuses on presenting data related to international tourist arrivals from specific regions. 
+        The data is organized based on the regions of origin. The visualization aims to provide insights into the 
+        average number of tourist arrivals over time, specifically focusing on the years and regions selected. </p>
+
+
+    <div id="vis3"></div>
+
+    <div class="container">
+      <div class="text">
+        <p style="color: rgb(63, 63, 82); font-size: 16px; font-family: 'Times New Roman', serif;">This 
+        visualization focuses on exploring the connection between employment in the food and beverage serving 
+        activities sector and the average Tourism Gross Domestic Product (GDP) in specific countries.</p>
+
+    <div id="vis4"></div>
+    </div>
+    
 
     <script>
         const spec = {
@@ -175,9 +214,123 @@
             ]
           };
 
+        const spec3 = {
+          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+          "title": { "text": "International Tourist Arrivals by Region of Origin" },
+          "width": 800, "height": 300,
+          "data": {"url": "https://raw.githubusercontent.com/ploo0007/3179/main/1-%20international-tourist-arrivals-by-region-of-origin.csv"},
+          "mark": {"type":"area", "opacity":0.8},
+          "transform": [
+              {
+                  "filter": {
+                      "field": "Entity",
+                      "oneOf": ["Africa","AmeSricas","East Asia and the Pacific","Europe","Middle East","South Asia"]
+                  }
+              },
+              {"filter": "Entity_selection == null || datum.Entity == Entity_selection"}
+          ],
+          "params": [
+              {
+              "name": "Entity_selection",
+              "bind": {
+                  "input": "select",
+                  "options": [
+                  null,
+                  "Africa","East Asia and the Pacific","Europe","Middle East","South Asia"
+                  ],
+                  "labels":[
+                  "Show All",
+                  "Africa","East Asia and the Pacific","Europe","Middle East","South Asia"
+                  ],
+                  "name": "Continent Selection: "
+                  }
+                  }
+                  ],
+          "encoding": {
+            "x": {
+              "timeUnit": "yearmonth", "field": "Year",
+              "axis": {"domain": false, "format": "%Y", "tickSize": 0}
+            },
+            "y": {
+              "aggregate": "average", "field": "Arrivals",
+              "axis": null,
+              "stack": "center"
+            },
+            
+            "color": {"field":"Entity", "scale":{"scheme": "accent"}},
+            "tooltip": [
+              {"field": "Year", "type": "temporal", "title": "Year"},
+              {"field": "Arrivals", "type": "quantitative", "title": "Arrivals"}
+            ]
+          }
+          
+        };
+
+        const spec4 = {
+          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+          "title": { "text": "Relationship between the Employment of Food and Beverage Serving Activities v.s. the Average of Tourism GDP" },
+          "width":300,
+          "data": {
+            "url": "https://raw.githubusercontent.com/ploo0007/3179/main/food_beverage_gdp.csv"
+          },
+          "mark": "point",
+          "encoding": {
+            "x": {
+              "field": "Employment",
+              "type": "quantitative",
+              "scale": {"zero": false},
+              "title": "Employment of Food and Beverage Serving Activities (per 1000 people)"
+            },
+            "y": {
+              "field": "Tourism_GDP",
+              "type": "quantitative",
+              "scale": {"zero": false},
+              "aggregate":"variance",
+              "title":"Average of Tourism GDP"
+            },
+            "color": {"field": "Entity", "type": "nominal"}
+          },
+          "transform": [
+              {
+                "filter": {
+                  "field": "Entity",
+                  "oneOf": ["South Korea", "Japan","France","India","Indonesia",
+                "Israel","Mexico","New Zealand","South Africa","United Kingdom"]
+                }
+              },
+              {"filter": "Entity_selection == null || datum.Entity == Entity_selection"}
+            ],
+            "params": [
+                {
+                "name": "Entity_selection",
+                "bind": {
+                    "input": "select",
+                    "options": [
+                    null,
+                    "South Korea", "Japan","France","India","Indonesia",
+                "Israel","Mexico","New Zealand","South Africa","United Kingdom"
+                    ],
+                    "labels":[
+                    "Show All",
+                    "South Korea", "Japan","France","India","Indonesia",
+                "Israel","Mexico","New Zealand","South Africa","United Kingdom"
+                    ],
+                    "name": "Entity Selection: "
+                    }
+                    }
+                    ]
+                
+        };
+          
+        
+        
+        // Embed the visualization in the "vis" div
         vegaEmbed("#vis", spec);
         vegaEmbed("#vis2",spec2);
+        vegaEmbed("#vis3",spec3);
+        vegaEmbed("#vis4",spec4);
     </script>
 </body>
 </html>
+
 
