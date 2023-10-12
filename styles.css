@@ -6,3 +6,82 @@
 	/*height: 1000px;
 	width: 800px;*/
 }
+/*
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.text {
+    flex: 0 0 40%; 
+    padding: 20px;
+    background-color: #f2f2f2;
+}
+
+.visualization {
+    flex: 0 0 55%; 
+} */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.text {
+    flex: 0 0 40%; 
+    padding: 20px;
+    margin-right: 20px; /* Add margin between text and visualization */
+    background-color: #f2f2f2;
+    text-align: center; /* Center the text content */
+}
+
+.visualization {
+    flex: 0 0 55%; 
+}
+
+.text-container {
+    margin-bottom: 40px; /* Adds 20 pixels of margin at the bottom */
+    padding: 30px; /* Adds 10 pixels of padding inside the container */
+    background-color: rgb(159, 141, 141); /* Optional: adds a white background */
+}
+
+.visualization-container {
+    padding: 30px; /* Adds 10 pixels of padding inside the container */
+    background-color: white; /* Optional: adds a white background */
+}
+
+.dashboard-title {
+	font-size: 36px; /* Change the font size to your preference */
+	font-family: "Arial", sans-serif; /* Change the font family to your preference */
+	font-weight: bold; /* Make the text bold */
+	color: #a8503df0; /* Change the color to your preference */
+	text-align: center;
+}
+
+.axis-title {
+	font-size: 18px; /* Adjust the font size for axis titles */
+}
+
+.visualization-title {
+	font-size: 24px; /* Adjust the font size for visualization titles */
+}
+
+.filter-menu {
+	font-size: 10px; /* Adjust the font size for the filtering menu */
+}
