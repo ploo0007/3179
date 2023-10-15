@@ -53,6 +53,7 @@ body {
 
 .visualization {
     flex: 0 0 55%; 
+	margin-top: 20px;
 }
 
 .text-container {
@@ -75,13 +76,32 @@ body {
 }
 
 .axis-title {
-	font-size: 18px; /* Adjust the font size for axis titles */
+	font-size: 30px; /* Adjust the font size for axis titles */
 }
 
 .visualization-title {
-	font-size: 24px; /* Adjust the font size for visualization titles */
+	font-size: 30px; /* Adjust the font size for visualization titles */
 }
 
 .filter-menu {
 	font-size: 10px; /* Adjust the font size for the filtering menu */
 }
+
+.text p {
+    line-height: 0.4; /* Adjust this value as needed to reduce line spacing */
+	font-family: sans-serif; /* Specify the font family */
+    font-size: 16px;
+	
+	
+}
+
+.text {
+	margin-left: 30px; /* Adjust the value to add the desired space between text and visualization */
+	margin: top 20%;
+	background-color: #f0dbbf;
+}
+
+.box{
+	margin-bottom: 20px;
+}
+
