@@ -1,0 +1,71 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title":"Expenditures of Tourists Abroad",
+    "width": 1000,
+    "height": 400,
+    "data": {
+      "url": "https://raw.githubusercontent.com/ploo0007/3179/main/20-average-expenditures-of-tourists-abroad.csv"
+
+    },
+    "transform": [
+        {
+            "filter": {
+                "oneOf": ["United States","South Korea", "Japan", "Brazil", "Canada", "France", "India", "Indonesia", "Ireland", "Israel", "Italy", "Mexico", "New Zealand", "South Africa", "Turkey", "United Kingdom"],
+                "field": "Entity"
+              }
+        }
+        
+      ],
+    "mark": "rect",
+    "encoding": {
+      "x": {
+        "timeUnit": "yearmonthdate",
+        "field": "Year",
+        "type": "ordinal",
+        "title": "Time",
+        "axis": {
+          "format": "%Y",
+          "labelAngle": 0,
+          "labelOverlap": false,
+          "labelColor": {
+            "condition": {
+              "test": {
+                "timeUnit": "monthdate",
+                "field": "value",
+                "equal": {"month": 1, "date": 1}
+              },
+              "value": "black"
+            },
+            "value": null
+          },
+          "tickColor": {
+            "condition": {
+              "test": {
+                "timeUnit": "monthdate",
+                "field": "value",
+                "equal": {"month": 1, "date": 1}
+              },
+              "value": "black"
+            },
+            "value": null
+          }
+        }
+        },
+      "color": {
+        "aggregate": "sum",
+        "scale":{"domain":[480000000,140195000000]},
+        "field": "outbound_tourism_expenditure",
+        "type": "quantitative",
+        "title": "Expenditure"
+      },
+      "y": {
+        "field": "Entity",
+        "type": "nominal",
+        "title": "Country",
+        "sort": {"op": "min", "field": "outbound_tourism_expenditure", "order": "ascending"}
+      }, "tooltip": [
+        {"field": "Year", "type": "temporal", "title": "Year"},
+        {"field": "outbound_tourism_expenditure", "type": "quantitative", "title": "Expenditure"}
+      ]
+    }
+  }
