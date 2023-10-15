@@ -1,0 +1,52 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": { "text": "International Tourist Arrivals by Region of Origin" },
+    "width": 1000, "height": 500,
+    "data": {"url": "https://raw.githubusercontent.com/ploo0007/3179/main/1-%20international-tourist-arrivals-by-region-of-origin.csv"},
+    
+    "mark": {"type":"area", "opacity":0.8},
+    "transform": [
+        {
+            "filter": {
+                "field": "Entity",
+                "oneOf": ["Africa","Americas","East Asia and the Pacific","Europe","Middle East","South Asia"]
+            }
+        },
+        {"filter": "Entity_selection == null || datum.Entity == Entity_selection"}
+    ],
+    "params": [
+        {
+        "name": "Entity_selection",
+        "bind": {
+            "input": "select",
+            "options": [
+            null,
+            "Africa","Americas","East Asia and the Pacific","Europe","Middle East","South Asia"
+            ],
+            "labels":[
+            "Show All",
+            "Africa","Americas","East Asia and the Pacific","Europe","Middle East","South Asia"
+            ],
+            "name": "Continent Selection: "
+            }
+            }
+            ],
+    "encoding": {
+      "x": {
+        "timeUnit": "yearmonth", "field": "Year",
+        "axis": {"domain": false, "format": "%Y", "tickSize": 0},"title":"Year"
+      },
+      "y": {
+        "aggregate": "average", "field": "Arrivals",
+        "axis": null,
+        "stack": "center"
+      },
+      
+      "color": {"field":"Entity", "scale":{"scheme": "accent"}},
+      "tooltip": [
+        {"field": "Year", "type": "temporal", "title": "Year"},
+        {"field": "Arrivals", "type": "quantitative", "title": "Arrivals"}
+      ]
+    }
+    
+  }
