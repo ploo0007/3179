@@ -1,0 +1,59 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": { "text": "The relationship between Food Service Employment and Tourism GDP" },
+    "width":800,
+    "height":400,
+    "data": {
+      "url": "https://raw.githubusercontent.com/ploo0007/3179/main/food_beverage_gdp.csv"
+    },
+    "mark": "point",
+    "encoding": {
+      "x": {
+        "field": "Employment",
+        "type": "quantitative",
+        "scale": {"zero": false},
+        "title": "Employment of Food Service Employment (per 1000 people)"
+      },
+      "y": {
+        "field": "Tourism_GDP",
+        "type": "quantitative",
+        "scale": {"zero": false,"domain":[0,0.70]},
+        "aggregate":"variance",
+        "title":"Average of Tourism GDP"
+      },
+      "color": {"field": "Entity", "type": "nominal","scale": {
+        "range": ["#4e79a7", "#f28e2b", "#e15759", "#76b7b2", "#59a14f", "#edc949", "#af7aa1", "#ff9da7", "#9c755f", "#bab0ab"]
+      }}
+   
+    },
+    "transform": [
+        {
+          "filter": {
+            "field": "Entity",
+            "oneOf": ["South Korea", "Japan","France","India","Indonesia",
+          "Israel","Mexico","New Zealand","South Africa","United Kingdom"]
+          }
+        },
+        {"filter": "Entity_selection == null || datum.Entity == Entity_selection"}
+      ],
+      "params": [
+          {
+          "name": "Entity_selection",
+          "bind": {
+              "input": "select",
+              "options": [
+              null,
+              "South Korea", "Japan","France","India","Indonesia",
+          "Israel","Mexico","New Zealand","South Africa","United Kingdom"
+              ],
+              "labels":[
+              "Show All",
+              "South Korea", "Japan","France","India","Indonesia",
+          "Israel","Mexico","New Zealand","South Africa","United Kingdom"
+              ],
+              "name": "Entity Selection: "
+              }
+              }
+              ]
+          
+  }
